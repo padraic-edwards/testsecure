@@ -7,38 +7,8 @@ inputs:
   - type: git
     branch: master
     service: ${TEKTON_CATALOG_REPO}
-    path: preview/git
-  - type: git
-    branch: master
-    service: ${TEKTON_CATALOG_REPO}
-    path: preview/compliance-checks
-  - type: git
-    branch: master
-    service: ${TEKTON_CATALOG_REPO}
-    path: preview/iks
-  - type: git
-    branch: master
-    service: ${TEKTON_CATALOG_REPO}
-    path: preview/containerize
-  - type: git
-    branch: master
-    service: ${TEKTON_CATALOG_REPO}
-    path: preview/dct
+    path: git
 triggers:
-  - type: git
-    name: Git PR Trigger
-    service: ${APP_REPO}
-    branch: master
-    events:
-      pull_request: true
-    eventListener: pr-listener
-  - type: git
-    name: Git CI Trigger
-    service: ${APP_REPO}
-    branch: master
-    events:
-      push: true
-    eventListener: listener
   - type: manual
     name: Manual Trigger
     eventListener: listener
@@ -48,9 +18,6 @@ properties:
     type: SECURE
   - name: imageUrl
     value: ${IMAGE_URL}
-    type: text
-  - name: evidence-repo
-    value: ${EVIDENCE_REPO}
     type: text
   - name: revision
     value: master
@@ -76,24 +43,9 @@ properties:
   - name: dev-resource-group
     value: ${DEV_RESOURCE_GROUP}
     type: text
-  - name: build-signer
-    value: ${BUILD_SIGNER}
-    type: text
-  - name: validation-signer
-    value: ${VALIDATION_SIGNER}
-    type: text
-  - name: vault-name
-    value: ${VAULT_INSTANCE}
-    type: text
-  - name: repository-integration
-    value: app-repo
-    type: text
   - name: dockerconfigjson
     value: ${DOCKER_CONFIG_JSON}
     type: text
   - name: repository
     value: ${APP_REPO_FULL}
-    type: text
-  - name: pipeline-debug
-    value: "0"
     type: text
