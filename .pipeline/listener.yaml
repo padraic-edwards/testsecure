@@ -37,7 +37,7 @@ spec:
         name: pipelinerun-$(uid)
       spec:
         pipelineRef:
-          name: pipeline-clone-task
+          name: clone-repo-task
         params:
           - name: pipeline-pvc
             value: pipelinerun-$(uid)-pvc
