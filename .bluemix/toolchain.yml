@@ -95,7 +95,7 @@ services:
           DEV_RESOURCE_GROUP: '{{form.pipeline.parameters.dev-resource-group}}'
           DEV_CLUSTER_NAME: '{{form.pipeline.parameters.dev-cluster-name}}'
           DEV_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.dev-cluster-namespace}}'
-          APP_REPO_FULL: 'https://github.ibm.com/{{form.app-repo.parameters.owner_id}}/{{form.app-repo.parameters.repo_name}}'
+          APP_REPO_FULL: 'https://github.com/{{form.app-repo.parameters.owner_id}}/{{form.app-repo.parameters.repo_name}}'
           TEKTON_CATALOG_REPO: tekton-catalog-repo
         execute: false
   webide:
