@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: pipeline-secure-kube
+  name: pipeline-simple-clone
 spec:
   params:
     - name: pipeline-pvc
@@ -11,7 +11,7 @@ spec:
     - name: branch
       description: the branch for the git repo
   tasks:
-    - name: pipeline-clone-task
+    - name: pipeline-simple-clone-task
       taskRef:
         name: clone-repo-task
       params:
