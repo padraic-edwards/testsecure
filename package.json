@@ -1,0 +1,29 @@
+{
+  "name": "compliance-ci-toolchain",
+  "version": "1.0.0",
+  "description": "Tekton CI Pipeline with Compliance automation for Kubernetes",
+  "main": "toolchain.yml",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "yamllint -c yamllint-rules.yaml .bluemix",
+    "postinstall": "pip install --user yamllint || brew install yamllint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.ibm.com/one-pipeline/compliance-cd-toolchain.git"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "husky": "^3.1.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "IBM",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
