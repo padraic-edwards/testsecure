@@ -79,11 +79,15 @@ services:
         - tekton-catalog-repo
       name: '{{services.app-repo.parameters.repo_name}}'
       ui-pipeline: true
-      type: tekton
+      type: >
+        $env.enableTekton === 'true' ? 'tekton' : 'ui'
       configuration:
         content:
-          $text: pipeline_tekton.yml
+          $text: >
+            $env.enableTekton === 'true' ? pipeline_tekton.yml : pipeline.yml
         env:
+          GIT_REPO: repo
+          CF_APP_NAME: '{{form.pipeline.parameters.app-name}}'
           PIPELINE_REPO: pipeline-repo
           APP_REPO: app-repo
           IMAGE_URL: 'us.icr.io/{{form.pipeline.parameters.registry-namespace}}/{{form.pipeline.parameters.app-name}}'
@@ -97,6 +101,10 @@ services:
           DEV_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.dev-cluster-namespace}}'
           APP_REPO_FULL: 'https://github.com/{{form.app-repo.parameters.owner_id}}/{{form.app-repo.parameters.repo_name}}'
           TEKTON_CATALOG_REPO: tekton-catalog-repo
+          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+          PROD_RESOURCE_GROUP: '{{form.pipeline.parameters.prod-resource-group}}'
+          PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
+          PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
         execute: false
   webide:
     service_id: orion
